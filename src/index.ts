@@ -94,7 +94,7 @@ export const app = new Elysia()
       // handle base game route
       if (!page) {
         const req = await fetch(
-          `https://sdataprod.ncaa.com/?meta=GetGamecenterGameById_web&extensions={%22persistedQuery%22:{%22version%22:1,%22sha256Hash%22:%2293a02c7193c89d85bcdda8c1784925d9b64657f73ef584382e2297af555acd4b%22}}&variables={%22id%22:%22${id}%22,%22week%22:null,%22staticTestEnv%22:null}`
+          `https://sdataprod.ncaa.com/?meta=GetGamecenterGameById_web&extensions={%22persistedQuery%22:{%22version%22:1,%22sha256Hash%22:%22babb939def47c602a6e81af7aa3f6b35197fb1f1b1a2f2b081f3a3e4924be82e%22}}&variables={%22contestId%22:%22${id}%22,%22week%22:null,%22staticTestEnv%22:null}`
         );
         if (!req.ok) {
           return error(404, "Resource not found");
