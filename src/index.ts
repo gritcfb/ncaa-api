@@ -105,12 +105,17 @@ export const app = new Elysia()
           }),
           variables: JSON.stringify({ contestId: id, week: null, staticTestEnv: null }),
         });
+        
         const req = await fetch(`${baseUrl}?${params.toString()}`, {
           headers: {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-            Accept: "application/json",
+            Accept: "application/json, text/plain, */*",
+            "Accept-Language": "en-US,en;q=0.9",
+            Referer: `https://www.ncaa.com/game/football/college/${id}`,
+            Origin: "https://www.ncaa.com",
           },
         });
+
         if (!req.ok) {
           return error(404, "Resource not found");
         }
