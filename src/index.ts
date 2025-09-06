@@ -93,9 +93,24 @@ export const app = new Elysia()
       }
       // handle base game route
       if (!page) {
-        const req = await fetch(
-          `https://sdataprod.ncaa.com/?meta=GetGamecenterGameById_web&extensions={%22persistedQuery%22:{%22version%22:1,%22sha256Hash%22:%22babb939def47c602a6e81af7aa3f6b35197fb1f1b1a2f2b081f3a3e4924be82e%22}}&variables={%22contestId%22:%22${id}%22,%22staticTestEnv%22:null}`
-        );
+        const baseUrl = "https://sdataprod.ncaa.com/";
+        const params = new URLSearchParams({
+          meta: "GetGamecenterGameById_web",
+          extensions: JSON.stringify({
+            persistedQuery: {
+              version: 1,
+              sha256Hash:
+                "babb939def47c602a6e81af7aa3f6b35197fb1f1b1a2f2b081f3a3e4924be82e",
+            },
+          }),
+          variables: JSON.stringify({ contestId: id, week: null, staticTestEnv: null }),
+        });
+        const req = await fetch(`${baseUrl}?${params.toString()}`, {
+          headers: {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+            Accept: "application/json",
+          },
+        });
         if (!req.ok) {
           return error(404, "Resource not found");
         }
